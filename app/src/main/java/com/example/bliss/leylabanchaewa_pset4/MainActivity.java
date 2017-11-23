@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -49,7 +50,12 @@ public class MainActivity extends AppCompatActivity {
         editText.setText("");
         db = TodoDatabase.getInstance(getApplicationContext());
         db.insert(todo_item, 0);
+
         updateData();
+
+        String added = "Item added";
+        Toast.makeText(MainActivity.this, (String) added,
+                Toast.LENGTH_LONG).show();
     }
 
     private void updateData() {
@@ -90,6 +96,9 @@ public class MainActivity extends AppCompatActivity {
             int long_id = cursor.getInt(cursor.getColumnIndex("_id"));
             db.delete(long_id);
             updateData();
+            String deleted = "Item deleted";
+            Toast.makeText(MainActivity.this, (String) deleted,
+                    Toast.LENGTH_LONG).show();
             return false;
         }
     }
