@@ -46,11 +46,9 @@ public class MainActivity extends AppCompatActivity {
 
     private void addItem(){
         EditText editText = findViewById(R.id.editText);
-        String todo_item = editText.getText().toString();
-        editText.setText("");
-        db = TodoDatabase.getInstance(getApplicationContext());
-        db.insert(todo_item, 0);
 
+        db.insert(editText.getText().toString(), 0);
+        editText.setText("");
         updateData();
 
         String added = "Item added";
@@ -59,9 +57,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void updateData() {
-        db = TodoDatabase.getInstance(getApplicationContext());
 
         Cursor newCursor = db.selectAll();
+
         adapter.swapCursor(newCursor);
         listView.setAdapter(adapter);
     }
